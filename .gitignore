@@ -3,3 +3,5 @@ build
 *.iml
 *.iws
 *.ipr
+.redo
+target
