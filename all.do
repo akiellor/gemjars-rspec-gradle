@@ -1,1 +1,1 @@
-redo-ifchange 'sample.jar'
+redo-ifchange 'target/sample.jar'
