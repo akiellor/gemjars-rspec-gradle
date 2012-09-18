@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require 'pathname'
+
+unless ARGV.size > 0 && ARGV.all? { |f| File.exists?(f) }
+  $stderr.puts "Bad file list."
+  exit 1 
+end
+
+paths = ARGV.map {|f| Pathname.new(f).realpath}
+
+unless paths.all? {|path| path.relative_path_from(Pathname.pwd).to_s.start_with?("src") }
+  $stderr.puts "Bad source file in:"
+  paths.each {|p| $stderr.puts p}
+  exit 1 
+end
+
+sets = paths.map do |path|
+ set, language, *rest = path.relative_path_from(Pathname.new('src').realpath).to_s.split("/")
+ set
+end
+
+sets.uniq.each {|s| puts s}
+

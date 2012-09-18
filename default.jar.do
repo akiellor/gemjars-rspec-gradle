@@ -1,7 +1,10 @@
+export PATH=$PATH:"./script"
+
 SRC_DIR="src/main/java"
-OUT_DIR="target"
+INPUT=$(find . -type f | grep $SRC_DIR | grep ".java$")
+
+OUT_DIR="target/$(source-set $INPUT)"
 CLASSES_DIR="$OUT_DIR/classes"
-INPUT=$(find . -type f | grep "src/main/java" | grep ".java$")
 OUT_FILE=$(pwd)/$3
 
 for d in $INPUT; do echo "${d%.java}.java-stamp"; done | xargs redo-ifchange
