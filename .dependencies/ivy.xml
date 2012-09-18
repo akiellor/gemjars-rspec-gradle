@@ -9,7 +9,9 @@
 
   <configurations>
     <conf name="compile" />
+    <conf name="main.compile" extends="compile" />
     <conf name="runtime" extends="compile" />
+    <conf name="test.runtime" extends="runtime" />
   </configurations>
 
   <dependencies>

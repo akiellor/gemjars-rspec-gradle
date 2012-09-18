@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -e
+
+find $(source-dir $1 $2) -type f

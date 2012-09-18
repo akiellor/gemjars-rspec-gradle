@@ -1,18 +1,16 @@
 export PATH=$PATH:"./script"
 
-SRC_DIR="src/main/java"
-INPUT=$(find . -type f | grep $SRC_DIR | grep ".java$")
+SRC_DIR=$(source-dir main java)
+INPUT=$(sources main java)
 
-OUT_DIR="target/$(source-set $INPUT)"
-CLASSES_DIR="$OUT_DIR/classes"
+CLASSES_DIR=$(target-class-dir main)
 OUT_FILE=$(pwd)/$3
 
 for d in $INPUT; do echo "${d%.java}.java-stamp"; done | xargs redo-ifchange
 
-redo-ifchange "compile.classpath"
+redo-ifchange $(classpath main compile)
 
-mkdir -p $CLASSES_DIR
 touch needs-compile
-sort -u needs-compile | xargs javac -sourcepath $SRC_DIR -classpath "$(cat compile.classpath):$CLASSES_DIR" -d $CLASSES_DIR >&2
+sort -u needs-compile | xargs javac -sourcepath $SRC_DIR -classpath "$(classpath main compile):$CLASSES_DIR" -d $CLASSES_DIR >&2
 rm -f needs-compile
 cd $CLASSES_DIR && zip -r $OUT_FILE . > /dev/null

@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+exit 1 unless ARGV.first
+
+require 'pathname'
+
+p = Pathname.new("target/#{ARGV.first}/classes")
+p.mkpath
+puts p.realpath
