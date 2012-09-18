@@ -3,9 +3,13 @@ OUT_DIR="target"
 CLASSES_DIR="$OUT_DIR/classes"
 INPUT=$(find . -type f | grep "src/main/java" | grep ".java$")
 OUT_FILE=$(pwd)/$3
-echo $INPUT | xargs redo-ifchange
+
+for d in $INPUT; do echo "${d%.java}.java-stamp"; done | xargs redo-ifchange
+
 redo-ifchange "compile.classpath"
 
 mkdir -p $CLASSES_DIR
-javac -verbose -sourcepath $SRC_DIR -classpath "$(cat compile.classpath):$CLASSES_DIR" -d $CLASSES_DIR $(find $SRC_DIR -type f) >&2
-cd $CLASSES_DIR && zip -r $OUT_FILE . >&2
+touch needs-compile
+sort -u needs-compile | xargs javac -sourcepath $SRC_DIR -classpath "$(cat compile.classpath):$CLASSES_DIR" -d $CLASSES_DIR >&2
+rm -f needs-compile
+cd $CLASSES_DIR && zip -r $OUT_FILE . > /dev/null
