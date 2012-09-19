@@ -1,6 +1,11 @@
-export PATH=$PATH:./script
+#!/bin/sh
 
-redo-ifchange "target/sample.jar"
+set -e
+
+export PATH=$PATH:$(pwd)/script
+
+redo-ifchange $(target-jar main)
 redo-ifchange $(sources test ruby)
 redo-ifchange $(classpath test runtime)
-java -cp $(cat $(classpath test runtime)):target/sample.jar org.jruby.Main classpath:bin/rspec --color $(source-dir test ruby) >&2
+
+java -cp $(cat $(classpath test runtime)):$(target-jar main) org.jruby.Main classpath:bin/rspec --color $(source-dir test ruby) >&2
