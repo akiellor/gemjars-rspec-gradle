@@ -8,4 +8,4 @@ redo-ifchange $(target-jar main)
 redo-ifchange $(sources test ruby)
 redo-ifchange $(classpath test runtime)
 
-java -cp $(cat $(classpath test runtime)):$(target-jar main) org.jruby.Main classpath:bin/rspec --color $(source-dir test ruby) >&2
+java -server -Xms16m -Xmx32m -cp $(cat $(classpath test runtime)):$(target-jar main) org.jruby.Main classpath:bin/rspec --color $(source-dir test ruby) >&2
