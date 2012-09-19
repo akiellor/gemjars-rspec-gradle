@@ -11,6 +11,6 @@ for d in $INPUT; do echo "${d%.java}.java-stamp"; done | xargs redo-ifchange
 redo-ifchange $(classpath main compile)
 
 touch needs-compile
-sort -u needs-compile | xargs javac -sourcepath $SRC_DIR -classpath "$(classpath main compile):$CLASSES_DIR" -d $CLASSES_DIR >&2
+sort -u needs-compile | xargs javac -sourcepath $SRC_DIR -classpath "$(classpath main compile)" -d $CLASSES_DIR >&2
 rm -f needs-compile
 cd $CLASSES_DIR && zip -r $OUT_FILE . > /dev/null
