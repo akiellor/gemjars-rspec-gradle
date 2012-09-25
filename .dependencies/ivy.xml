@@ -16,7 +16,7 @@
   </configurations>
 
   <dependencies>
-    <dependency org="org.jruby" name="jruby-complete" rev="1.6.7.2" conf="compile->default" />
+    <dependency org="org.jruby" name="jruby-complete" rev="1.7.0.preview2" conf="compile->default" />
     <dependency org="org.rubygems" name="rspec" rev="2.11.0" conf="compile->default" />
     <dependency org="net.sourceforge.cobertura" name="cobertura" rev="1.9.4.1" conf="instrumented.compile->default" />
     <dependency org="asm" name="asm" rev="3.3.1" conf="instrumented.compile->default" />
