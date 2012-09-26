@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require 'pathname'
+
+project_root = Pathname.pwd.ascend do |pathname|
+  break pathname if pathname.children(false).include? Pathname.new(".project")
+end
+
+if project_root
+  puts project_root.to_s
+else
+  exit 1
+end
