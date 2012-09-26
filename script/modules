@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require 'pathname'
+
+project_root = Pathname.new(`project-root`.strip)
+
+modules = project_root.children.to_enum.select(&:directory?).map(&:children).flatten.select do |pathname|
+  pathname.basename.to_s == ".module"
+end
+
+modules.map do |pathname|
+  puts pathname.parent.to_s
+end
+
+
