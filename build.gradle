@@ -3,7 +3,7 @@ apply plugin: 'java'
 
 repositories {
     maven {
-        url 'http://repository.gemjars.org/maven'
+        url 'http://deux.gemjars.org'
     }
     mavenCentral()
 }
