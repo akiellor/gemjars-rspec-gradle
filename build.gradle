@@ -1,5 +1,10 @@
-apply plugin: 'idea'
 apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+// IDE integration
+eclipse.classpath.downloadSources = true
+eclipse.classpath.downloadJavadoc = true
 
 repositories {
     maven {
